@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/eberlitz/gym-dev-unisinos.svg?branch=master)](https://travis-ci.org/eberlitz/gym-dev-unisinos)
+
 # Dependencies
 
 - Node v7+ (I`m using v8.4.0)
