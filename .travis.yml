@@ -21,7 +21,6 @@ before_script:
 - npm install -g @angular/cli@latest
 - npm install -g karma
 - npm install -g protractor
-- npm install
 - ng build
 
-script: ng run test
+script: npm run test
