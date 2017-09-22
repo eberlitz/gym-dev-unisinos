@@ -17,7 +17,9 @@ const userSchema = new mongoose.Schema({
   local: {
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true }
-  }
+  },
+  name: { type: String, required: true, unique: true },
+  admin: { type: Boolean, default: false }
 }, { timestamps: true });
 
 // generating a hash

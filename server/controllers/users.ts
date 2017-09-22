@@ -1,22 +1,13 @@
-import { User } from '../models/user';
 import express = require('express');
 const router = express.Router();
+
+import { User } from '../models/user';
 
 // users list
 router.get('/', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const users = await User.find({});
+    const users = await User.find();
     res.json(users);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
-
-// get single user
-router.get('/:id', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-  try {
-    const user = await User.findById(req.params.id);
-    res.json(user);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -25,16 +16,22 @@ router.get('/:id', async (req: express.Request, res: express.Response, next: exp
 // create user
 router.post('/', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const { username, password } = req.body;
-    const user = new User({
-      local: {
-        username
-      }
-    });
-    if (password) {
-      user.local.password = user.generateHash(password);
+    const user = new User(req.body);
+    if (user.local.password) {
+      user.local.password = user.generateHash(user.local.password);
     }
     await user.save();
+    res.json(user);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// get user by id
+router.get('/:id', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  try {
+    const _id = req.params.id;
+    const user = await User.findOne({ _id });
     res.json(user);
   } catch (error) {
     res.status(500).send(error);
@@ -44,15 +41,12 @@ router.post('/', async (req: express.Request, res: express.Response, next: expre
 // edit user
 router.put('/:id', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const params = {
-      local: req.body
-    };
-    if (params.local.password) {
-      params.local.password = User.prototype.generateHash(params.local.password);
+    const _id = req.params.id;
+    const local = req.body;
+    if (local && local.password) {
+      local.password = User.prototype.generateHash(local.password);
     }
-    const user = await User.findOneAndUpdate({
-      _id: req.params.id
-    }, params, { new: true, runValidators: true });
+    const user = await User.findOneAndUpdate({ _id }, { local }, { new: true, runValidators: true });
     res.json(user);
   } catch (error) {
     res.status(500).send(error);
