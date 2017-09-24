@@ -11,8 +11,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent {
 
-  username: string;
-  password: string;
+  username: string = 'admin';
+  password: string = 'admin';
 
   constructor(
     private _router: Router,
@@ -23,10 +23,12 @@ export class LoginComponent {
   async login() {
     try {
       this._loadingService.register();
+
       await this._authService.auth('local', {
         username: this.username,
         password: this.password
       });
+
       this._router.navigate(['/']);
     } catch (error) {
       alert(error);
