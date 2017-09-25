@@ -16,19 +16,21 @@ import 'rxjs/add/operator/toPromise';
 })
 export class UsersFormComponent implements OnInit {
 
-  displayName: string;
-  email: string;
   id: string;
+  name: string;
+  username: string;
+  password: string;
   admin: boolean;
-  user: IUser;
   action: string;
 
+  user: IUser;
+
   constructor(private _userService: UserService,
-              private _router: Router,
-              private _route: ActivatedRoute,
-              private _snackBarService: MdSnackBar,
-              private _loadingService: TdLoadingService,
-              private _dialogService: TdDialogService) {}
+    private _router: Router,
+    private _route: ActivatedRoute,
+    private _snackBarService: MdSnackBar,
+    private _loadingService: TdLoadingService,
+    private _dialogService: TdDialogService) { }
 
   goBack(): void {
     this._router.navigate(['/users']);
@@ -38,7 +40,7 @@ export class UsersFormComponent implements OnInit {
     this._route.url.subscribe((url: any) => {
       this.action = (url.length > 1 ? url[1].path : 'add');
     });
-    this._route.params.subscribe((params: {id: string}) => {
+    this._route.params.subscribe((params: { id: string }) => {
       this.id = params.id;
       if (this.id) {
         this.load();
@@ -49,12 +51,14 @@ export class UsersFormComponent implements OnInit {
   async load(): Promise<void> {
     try {
       this._loadingService.register('user.form');
+
       let user: IUser = await this._userService.get(this.id).toPromise();
-      this.displayName = user.displayName;
-      this.email = user.email;
-      this.admin = (user.siteAdmin === 1 ? true : false);
+      this.name = user.name;
+      this.username = user.local.username;
+      this.admin = user.admin;
+
     } catch (error) {
-      this._dialogService.openAlert({message: 'There was an error loading the user'});
+      this._dialogService.openAlert({ message: 'Houve um erro ao carregar o usuário.' });
     } finally {
       this._loadingService.resolve('user.form');
     }
@@ -63,25 +67,31 @@ export class UsersFormComponent implements OnInit {
   async save(): Promise<void> {
     try {
       this._loadingService.register('user.form');
-      let siteAdmin: number = (this.admin ? 1 : 0);
+
       let now: Date = new Date();
+
       this.user = {
-        displayName: this.displayName,
-        email: this.email,
-        siteAdmin: siteAdmin,
-        id: this.id || this.displayName.replace(/\s+/g, '.'),
-        created: now,
-        lastAccess: now,
+        id: this.id,
+        name: this.name,
+        admin: this.admin,
+        local: {
+          username: this.username,
+          password: this.password
+        },
+        createdAt: now,
+        updatedAt: now
       };
+
       if (this.action === 'add') {
         await this._userService.create(this.user).toPromise();
       } else {
         await this._userService.update(this.id, this.user).toPromise();
       }
-      this._snackBarService.open('User Saved', 'Ok');
+
+      this._snackBarService.open('Usuário cadastrado', 'Ok');
       this.goBack();
     } catch (error) {
-      this._dialogService.openAlert({message: 'There was an error saving the user'});
+      this._dialogService.openAlert({ message: 'Houve um erro ao salvar o usuário.' });
     } finally {
       this._loadingService.resolve('user.form');
     }

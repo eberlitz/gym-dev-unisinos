@@ -19,16 +19,16 @@ export class UsersComponent implements AfterViewInit, OnInit {
   filteredUsers: IUser[];
 
   constructor(private _titleService: Title,
-              private _loadingService: TdLoadingService,
-              private _dialogService: TdDialogService,
-              private _snackBarService: MdSnackBar,
-              private _userService: UserService,
-              private _changeDetectorRef: ChangeDetectorRef,
-              public media: TdMediaService) {
+    private _loadingService: TdLoadingService,
+    private _dialogService: TdDialogService,
+    private _snackBarService: MdSnackBar,
+    private _userService: UserService,
+    private _changeDetectorRef: ChangeDetectorRef,
+    public media: TdMediaService) {
   }
 
   ngOnInit(): void {
-    this._titleService.setTitle('Covalent Users');
+    this._titleService.setTitle('Usuários');
     this.load();
   }
 
@@ -40,9 +40,9 @@ export class UsersComponent implements AfterViewInit, OnInit {
     this._changeDetectorRef.detectChanges();
   }
 
-  filterUsers(displayName: string = ''): void {
+  filterUsers(name: string = ''): void {
     this.filteredUsers = this.users.filter((user: IUser) => {
-      return user.displayName.toLowerCase().indexOf(displayName.toLowerCase()) > -1;
+      return user.name.toLowerCase().indexOf(name.toLowerCase()) > -1;
     });
   }
 
@@ -60,7 +60,7 @@ export class UsersComponent implements AfterViewInit, OnInit {
 
   delete(id: string): void {
     this._dialogService
-      .openConfirm({message: 'Are you sure you want to delete this user?'})
+      .openConfirm({ message: 'Tem certeza que deseja excluir este usuário?' })
       .afterClosed().toPromise().then((confirm: boolean) => {
         if (confirm) {
           this._delete(id);
@@ -78,9 +78,9 @@ export class UsersComponent implements AfterViewInit, OnInit {
       this.filteredUsers = this.filteredUsers.filter((user: IUser) => {
         return user.id !== id;
       });
-      this._snackBarService.open('User Deleted', 'Ok');
+      this._snackBarService.open('Usuário excluído', 'Ok');
     } catch (error) {
-      this._dialogService.openAlert({message: 'There was an error trying to delete the user'});
+      this._dialogService.openAlert({ message: 'Houve um erro ao tentar excluir o usuário.' });
     } finally {
       this._loadingService.resolve('users.list');
     }

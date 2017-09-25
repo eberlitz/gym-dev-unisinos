@@ -5,12 +5,15 @@ import { Observable } from 'rxjs/Observable';
 import { HttpInterceptorService, RESTService } from '@covalent/http';
 
 export interface IUser {
-  displayName: string;
   id: string;
-  email: string;
-  created: Date;
-  lastAccess: Date;
-  siteAdmin: number;
+  name: string;
+  admin: boolean;
+  local: {
+    username: string;
+    password: string;
+  };
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export class UserService extends RESTService<IUser> {
@@ -24,16 +27,16 @@ export class UserService extends RESTService<IUser> {
 
   staticQuery(): Observable<IUser[]> {
     return this._http.get('data/users.json')
-    .map((res: Response) => {
-      return res.json();
-    });
+      .map((res: Response) => {
+        return res.json();
+      });
   }
 }
 
 export const USERS_API: InjectionToken<string> = new InjectionToken<string>('USERS_API');
 
 export function USER_PROVIDER_FACTORY(
-    parent: UserService, interceptorHttp: HttpInterceptorService, api: string): UserService {
+  parent: UserService, interceptorHttp: HttpInterceptorService, api: string): UserService {
   return parent || new UserService(interceptorHttp, api);
 }
 

@@ -10,9 +10,9 @@ import { MdIconRegistry } from '@angular/material';
 export class AppComponent {
 
   constructor(private _iconRegistry: MdIconRegistry,
-              private _domSanitizer: DomSanitizer) {
-    this._iconRegistry.addSvgIconInNamespace('assets', 'teradata',
-      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/teradata.svg'));
+    private _domSanitizer: DomSanitizer) {
+    this._iconRegistry.addSvgIconInNamespace('assets', 'gym',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/gym.svg'));
     this._iconRegistry.addSvgIconInNamespace('assets', 'github',
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/github.svg'));
     this._iconRegistry.addSvgIconInNamespace('assets', 'covalent',

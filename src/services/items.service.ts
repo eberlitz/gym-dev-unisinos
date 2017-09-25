@@ -15,21 +15,21 @@ export class ItemsService extends RESTService<any> {
 
   staticQuery(): any {
     return this._http.get('data/items.json')
-    .map((res: Response) => {
-      return res.json();
-    });
+      .map((res: Response) => {
+        return res.json();
+      });
   }
 
   staticGet(id: string): any {
     return this._http.get('data/items.json')
-    .map((res: Response) => {
-      let item: any;
-      res.json().forEach((s: any) => {
-        if (s.item_id === id) {
-          item = s;
-        }
+      .map((res: Response) => {
+        let item: any;
+        res.json().forEach((s: any) => {
+          if (s.item_id === id) {
+            item = s;
+          }
+        });
+        return item;
       });
-      return item;
-    });
   }
 }
