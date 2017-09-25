@@ -1,13 +1,14 @@
-import { User } from './models/user';
 import mongoose = require('mongoose');
-
-
+import { User } from './models/user';
 
 async function init() {
-  let adminUser = await User.findById('59ac3b3736adff29536e9ed9');
+  const _id = '59ac3b3736adff29536e9ed9';
+  let adminUser = await User.findOne({ _id });
   if (!adminUser) {
     adminUser = new User({
-      _id: new mongoose.Types.ObjectId('59ac3b3736adff29536e9ed9'),
+      _id: new mongoose.Types.ObjectId(_id),
+      name: 'admin',
+      admin: true,
       local: {
         username: 'admin'
       }
@@ -16,6 +17,5 @@ async function init() {
   }
   return await adminUser.save();
 }
-
 
 init();

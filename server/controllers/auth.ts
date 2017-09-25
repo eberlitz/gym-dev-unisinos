@@ -9,7 +9,6 @@ module.exports = router;
 import { config } from '../config';
 import { User, IUserSchema } from '../models/user';
 
-
 declare module 'express' {
   interface Request {
     user: { id: string };

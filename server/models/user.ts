@@ -3,23 +3,25 @@ const bcrypt = require('bcrypt-nodejs');
 
 export interface IUserSchema extends mongoose.Document {
   id: string;
-  createdAt: Date;
-  updatedAt: Date;
+  name: string;
+  admin: boolean;
   local: {
     username: string;
     password: string;
   };
+  createdAt: Date;
+  updatedAt: Date;
   generateHash(password: string): string;
   validPassword(password: string): boolean;
 }
 
 const userSchema = new mongoose.Schema({
+  name: { type: String, required: true, unique: true },
+  admin: { type: Boolean, default: false },
   local: {
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true }
-  },
-  name: { type: String, required: true, unique: true },
-  admin: { type: Boolean, default: false }
+  }
 }, { timestamps: true });
 
 // generating a hash
