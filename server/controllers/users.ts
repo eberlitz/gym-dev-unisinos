@@ -41,12 +41,26 @@ router.get('/:id', async (req: express.Request, res: express.Response, next: exp
 // edit user
 router.put('/:id', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
+    // find user
     const _id = req.params.id;
-    const local = req.body;
-    if (local && local.password) {
-      local.password = User.prototype.generateHash(local.password);
+    const user = await User.findOne({ _id });
+    // put request params on user
+    const params = req.body || {};
+    const local = params.local;
+    if (local) {
+      if (local.username) {
+        user.local.username = local.username;
+      }
+      if (local.password) {
+        user.local.password = user.generateHash(local.password);
+      }
     }
-    const user = await User.findOneAndUpdate({ _id }, { local }, { new: true, runValidators: true });
+    delete params.local;
+    for (const key in params) {
+      user[key] = params[key];
+    }
+    // save and return
+    await user.save();
     res.json(user);
   } catch (error) {
     res.status(500).send(error);
@@ -57,10 +71,7 @@ router.put('/:id', async (req: express.Request, res: express.Response, next: exp
 router.delete('/:id', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
     const _id = req.params.id;
-    if (req.user.id === _id) {
-      throw 'Cannot delete logged user!';
-    }
-    await User.findOneAndRemove({ _id });
+    await User.remove({ _id });
     res.status(204).send();
   } catch (error) {
     res.status(500).send(error);
