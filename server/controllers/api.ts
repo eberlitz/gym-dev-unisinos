@@ -8,7 +8,7 @@ router.get('/', (req: express.Request, res: express.Response, next: express.Next
   });
 });
 
-// users routes
 router.use('/users', require('./users'));
+router.use('/products', require('./products'));
 
 module.exports = router;

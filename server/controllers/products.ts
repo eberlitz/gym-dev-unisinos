@@ -1,12 +1,12 @@
 import express = require('express');
 const router = express.Router();
 
-import { User } from '../models/user';
+import { Product } from '../models/product';
 
 router.get('/', async (req: express.Request, res: express.Response) => {
   try {
-    const users = await User.find();
-    res.json(users);
+    const products = await Product.find(req.params || {});
+    res.json(products);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -14,12 +14,9 @@ router.get('/', async (req: express.Request, res: express.Response) => {
 
 router.post('/', async (req: express.Request, res: express.Response) => {
   try {
-    const user = new User(req.body);
-    if (user.local.password) {
-      user.local.password = user.generateHash(user.local.password);
-    }
-    await user.save();
-    res.json(user);
+    const product = new Product(req.body);
+    await product.save();
+    res.json(product);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -28,8 +25,8 @@ router.post('/', async (req: express.Request, res: express.Response) => {
 router.get('/:id', async (req: express.Request, res: express.Response) => {
   try {
     const _id = req.params.id;
-    const user = await User.findOne({ _id });
-    res.json(user);
+    const product = await Product.findOne({ _id });
+    res.json(product);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -38,23 +35,13 @@ router.get('/:id', async (req: express.Request, res: express.Response) => {
 router.put('/:id', async (req: express.Request, res: express.Response) => {
   try {
     const _id = req.params.id;
-    const user = await User.findOne({ _id });
-    const body = Object.assign({}, req.body);
-    const local = body.local;
-    if (local) {
-      if (local.username) {
-        user.local.username = local.username;
-      }
-      if (local.password) {
-        user.local.password = user.generateHash(local.password);
-      }
-    }
-    delete body.local;
+    const product = await Product.findOne({ _id });
+    const body = req.body || {};
     for (const key in body) {
-      user[key] = body[key];
+      product[key] = body[key];
     }
-    await user.save();
-    res.json(user);
+    await product.save();
+    res.json(product);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -63,8 +50,8 @@ router.put('/:id', async (req: express.Request, res: express.Response) => {
 router.delete('/:id', async (req: express.Request, res: express.Response) => {
   try {
     const _id = req.params.id;
-    await User.remove({ _id });
-    res.status(204).send();
+    await Product.remove({ _id });
+    res.status(204).json({});
   } catch (error) {
     res.status(500).send(error);
   }
