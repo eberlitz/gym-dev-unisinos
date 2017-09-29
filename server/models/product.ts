@@ -1,7 +1,6 @@
 import mongoose = require('mongoose');
 
 export interface IProductSchema extends mongoose.Document {
-  id: string;
   name: string;
   description: string;
   price: number;

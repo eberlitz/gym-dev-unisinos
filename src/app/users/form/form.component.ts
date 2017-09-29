@@ -17,6 +17,7 @@ import 'rxjs/add/operator/toPromise';
 export class UsersFormComponent implements OnInit {
 
   id: string;
+  email: any;
   name: string;
   username: string;
   password: string;
@@ -72,6 +73,7 @@ export class UsersFormComponent implements OnInit {
 
       this.user = {
         id: this.id,
+        email: this.email,
         name: this.name,
         admin: this.admin,
         local: {

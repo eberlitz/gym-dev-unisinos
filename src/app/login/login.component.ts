@@ -36,4 +36,8 @@ export class LoginComponent {
       this._loadingService.resolve();
     }
   }
+
+  register() {
+    this._router.navigate(['/register']);
+  }
 }

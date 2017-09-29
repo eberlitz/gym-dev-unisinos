@@ -7,6 +7,7 @@ import { HttpInterceptorService, RESTService } from '@covalent/http';
 export interface IUser {
   id: string;
   name: string;
+  email: string;
   admin: boolean;
   local: {
     username: string;
@@ -20,7 +21,7 @@ export class UserService extends RESTService<IUser> {
 
   constructor(private _http: HttpInterceptorService, api: string) {
     super(_http, {
-      baseUrl: api,
+      baseUrl: '~',
       path: '/users',
     });
   }

@@ -8,6 +8,7 @@ import bluebird = require('bluebird');
 import cors = require('cors');
 import bodyParser = require('body-parser');
 import morgan = require('morgan');
+import { create as createUser } from './controllers/users';
 
 import { config } from './config';
 
@@ -39,6 +40,9 @@ app.use(express.static(path.resolve(__dirname, '..', 'dist')));
 // Set our api routes
 app.use('/api', jwt({ secret: config.JWT_SECRET }), require('./controllers/api'));
 app.use('/auth', require('./controllers/auth'));
+app.use('/register', createUser);
+
+
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
