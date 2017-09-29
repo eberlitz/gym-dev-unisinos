@@ -1,14 +1,24 @@
-import { IUser } from '../../interfaces/user';
 import mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 
-export interface IUserSchema extends IUser, mongoose.Document {
+export interface IUserSchema extends mongoose.Document {
+  id: string;
+  name: string;
+  email: string;
+  admin: boolean;
+  local: {
+    username: string;
+    password: string;
+  };
+  createdAt: Date;
+  updatedAt: Date;
   generateHash(password: string): string;
   validPassword(password: string): boolean;
 }
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true },
   admin: { type: Boolean, default: false },
   local: {
     username: { type: String, required: true, unique: true },
