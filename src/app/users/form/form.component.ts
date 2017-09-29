@@ -17,7 +17,7 @@ import 'rxjs/add/operator/toPromise';
 export class UsersFormComponent implements OnInit {
 
   id: string;
-  email: any;
+  email: string;
   name: string;
   username: string;
   password: string;
@@ -56,6 +56,7 @@ export class UsersFormComponent implements OnInit {
       let user: IUser = await this._userService.get(this.id).toPromise();
       this.name = user.name;
       this.username = user.local.username;
+      this.email = user.email;
       this.admin = user.admin;
 
     } catch (error) {
