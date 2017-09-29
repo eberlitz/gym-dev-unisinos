@@ -1,6 +1,6 @@
 <div layout="column" layout-fill>
   <md-toolbar color="primary" class="md-whiteframe-z1">
-    <span>Login</span>
+    <span>Registrar</span>
   </md-toolbar>
   <div class="md-content" layout-padding flex>
     <div layout-gt-xs="row" layout-align-gt-xs="center start" class="margin">
@@ -11,7 +11,31 @@
           </div>
           <md-divider></md-divider>
           <md-card-content>
-            <form #loginForm="ngForm">
+            <form #registerForm="ngForm">
+              <div layout="row">
+                <md-input-container flex>
+                  <input mdInput #nameElement #nameControl="ngModel" placeholder="Nome" type="text" maxlength="30" name="name" [(ngModel)]="name"
+                    required>
+                  <!-- <span md-prefix><md-icon>person</md-icon></span> -->
+                  <md-hint align="start">
+                    <span [hidden]="!nameControl.errors?.required || nameControl.pristine" class="tc-red-600">Obrigatório</span>
+                  </md-hint>
+                  <md-hint align="end">{{nameElement.value.length}} / 30</md-hint>
+                </md-input-container>
+              </div>
+              <br>
+              <div layout="row">
+                <md-input-container flex>
+                  <input mdInput #emailElement #emailControl="ngModel" placeholder="E-mail" type="text" maxlength="30" name="email" [(ngModel)]="email"
+                    required>
+                  <span md-prefix><md-icon>person</md-icon></span>
+                  <md-hint align="start">
+                    <span [hidden]="!emailControl.errors?.required || emailControl.pristine" class="tc-red-600">Obrigatório</span>
+                  </md-hint>
+                  <md-hint align="end">{{emailElement.value.length}} / 30</md-hint>
+                </md-input-container>
+              </div>
+              <br>
               <div layout="row">
                 <md-input-container flex>
                   <input mdInput #userElement #userControl="ngModel" placeholder="Usuário" type="text" maxlength="30" name="username" [(ngModel)]="username"
@@ -37,9 +61,8 @@
             </form>
           </md-card-content>
           <md-divider></md-divider>
-          <md-card-actions layout="row" layout-xs="column" >
-            <button flex md-raised-button color="accent" [disabled]="!loginForm.form.valid" (click)="login()">Entrar</button>
-            <button flex md-raised-button (click)="register()">Registrar</button>
+          <md-card-actions layout="row" layout-xs="column">
+            <button flex md-raised-button color="accent" [disabled]="!registerForm.form.valid" (click)="register()">Registrar</button>
           </md-card-actions>
         </md-card>
       </div>

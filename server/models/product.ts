@@ -1,14 +1,7 @@
+import { IProduct } from '../../interfaces/product';
 import mongoose = require('mongoose');
 
-export interface IProductSchema extends mongoose.Document {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  stock: number;
-  createdAt: Date;
-  updatedAt: Date;
-}
+export interface IProductSchema extends IProduct, mongoose.Document {}
 
 const productSchema = new mongoose.Schema({
   name: {

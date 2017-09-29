@@ -1,16 +1,8 @@
+import { IUser } from '../../interfaces/user';
 import mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 
-export interface IUserSchema extends mongoose.Document {
-  id: string;
-  name: string;
-  admin: boolean;
-  local: {
-    username: string;
-    password: string;
-  };
-  createdAt: Date;
-  updatedAt: Date;
+export interface IUserSchema extends IUser, mongoose.Document {
   generateHash(password: string): string;
   validPassword(password: string): boolean;
 }

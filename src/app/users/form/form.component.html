@@ -7,6 +7,25 @@
     <ng-template tdLoading="user.form">
       <md-card-content class="push-bottom-none">
         <form #userForm="ngForm">
+            <div layout="row">
+              <md-input-container flex>
+                <input mdInput
+                        #emailElement
+                        #emailControl="ngModel"
+                        type="text"
+                        placeholder="E-mail"
+                        [(ngModel)]="email"
+                        email="email"
+                        maxlength="20"
+                        required>
+                <md-hint align="start">
+                  <span [hidden]="emailControl.pristine" class="tc-red-600">
+                    <span [hidden]="!emailControl.hasError('required')">Obrigatório</span>
+                  </span>
+                </md-hint>
+              </md-input-container>
+            </div>
+
           <div layout="row">
             <md-input-container flex>
               <input mdInput

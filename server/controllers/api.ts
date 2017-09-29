@@ -1,14 +1,8 @@
 import express = require('express');
 const router = express.Router();
+import { router as userRouter } from './users';
 
-router.get('/', (req: express.Request, res: express.Response, next: express.NextFunction) => {
-  res.json({
-    message: 'ok',
-    user: req.user
-  });
-});
-
-router.use('/users', require('./users'));
+router.use('/users', userRouter);
 router.use('/products', require('./products'));
 
 module.exports = router;

@@ -1,6 +1,5 @@
 import express = require('express');
 const router = express.Router();
-
 import { User } from '../models/user';
 
 router.get('/', async (req: express.Request, res: express.Response) => {
@@ -12,18 +11,7 @@ router.get('/', async (req: express.Request, res: express.Response) => {
   }
 });
 
-router.post('/', async (req: express.Request, res: express.Response) => {
-  try {
-    const user = new User(req.body);
-    if (user.local.password) {
-      user.local.password = user.generateHash(user.local.password);
-    }
-    await user.save();
-    res.json(user);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
+router.post('/', create);
 
 router.get('/:id', async (req: express.Request, res: express.Response) => {
   try {
@@ -70,4 +58,17 @@ router.delete('/:id', async (req: express.Request, res: express.Response) => {
   }
 });
 
-module.exports = router;
+export async function create(req: express.Request, res: express.Response) {
+  try {
+    const user = new User(req.body);
+    if (user.local.password) {
+      user.local.password = user.generateHash(user.local.password);
+    }
+    await user.save();
+    res.json(user);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}
+
+export { router };
