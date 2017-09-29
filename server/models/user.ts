@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt-nodejs');
 export interface IUserSchema extends mongoose.Document {
   id: string;
   name: string;
+  email: string;
   admin: boolean;
   local: {
     username: string;
@@ -17,6 +18,7 @@ export interface IUserSchema extends mongoose.Document {
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true },
   admin: { type: Boolean, default: false },
   local: {
     username: { type: String, required: true, unique: true },

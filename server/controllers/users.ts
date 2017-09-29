@@ -29,6 +29,17 @@ router.get('/:id', async (req: express.Request, res: express.Response) => {
   try {
     const _id = req.params.id;
     const user = await User.findOne({ _id });
+    delete user.local.password;
+    res.json(user);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+router.get('/me', async (req: express.Request, res: express.Response) => {
+  try {
+    const _id = req.user.id;
+    const user = await User.findOne({ _id });
     res.json(user);
   } catch (error) {
     res.status(500).send(error);
