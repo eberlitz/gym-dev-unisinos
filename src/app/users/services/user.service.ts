@@ -21,7 +21,7 @@ export class UserService extends RESTService<IUser> {
 
   constructor(private _http: HttpInterceptorService, api: string) {
     super(_http, {
-      baseUrl: '~',
+      baseUrl: '~/api/',
       path: '/users',
     });
   }

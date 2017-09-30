@@ -8,6 +8,7 @@ async function init() {
     adminUser = new User({
       _id: new mongoose.Types.ObjectId(_id),
       name: 'admin',
+      email: 'admin@admin.com',
       admin: true,
       local: {
         username: 'admin'
