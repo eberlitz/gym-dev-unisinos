@@ -17,7 +17,7 @@ export class DashboardProductComponent implements AfterViewInit, OnInit {
               public media: TdMediaService) { }
 
   ngOnInit(): void {
-    this._titleService.setTitle( 'Product Dashboard' );
+    this._titleService.setTitle( 'Cadastro de produtos' );
     this.title = this._titleService.getTitle();
   }
 

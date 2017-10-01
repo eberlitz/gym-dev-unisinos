@@ -1,6 +1,6 @@
 <md-card tdMediaToggle="gt-xs" [mediaClasses]="['push']">
   <md-card-title>
-    Feature Form
+    Formulário de produto
   </md-card-title>
   <md-divider></md-divider>
   <md-card-content class="push-bottom-none">
@@ -8,39 +8,71 @@
       <div layout="row">
         <md-input-container flex>
           <input mdInput
-                  #titleElement
-                  #titleControl="ngModel" 
-                  type="text" 
-                  placeholder="Feature Title" 
-                  [(ngModel)]="title" 
-                  name="title" 
-                  maxlength="20" 
+                  #nameElement
+                  #nameControl="ngModel"
+                  type="text"
+                  placeholder="Nome"
+                  [(ngModel)]="name"
+                  name="name"
+                  maxlength="20"
                   required>
           <md-hint align="start">
-            <span [hidden]="titleControl.pristine || !titleControl.errors?.required" class="tc-red-600">Required</span>
+            <span [hidden]="nameControl.pristine || !nameControl.errors?.required" class="tc-red-600">Required</span>
           </md-hint>
-          <md-hint align="end">{{titleElement.value.length}} / 20</md-hint>
+          <md-hint align="end">{{nameElement.value.length}} / 20</md-hint>
         </md-input-container>
       </div>
       <div layout="row" class="push-top">
         <md-input-container flex>
           <input mdInput
-                  #userElement
-                  #userControl="ngModel"
-                  type="text" 
-                  placeholder="User" 
-                  [(ngModel)]="user" 
-                  name="user"
+                  #descriptionElement
+                  #descriptionControl="ngModel"
+                  type="text"
+                  placeholder="Descrição"
+                  [(ngModel)]="description"
+                  name="description"
                   maxlength="30"
                   required>
           <md-hint align="start">
-            <span [hidden]="userControl.pristine || !userControl.errors?.required" class="tc-red-600">Required</span>
+            <span [hidden]="descriptionControl.pristine || !descriptionControl.errors?.required" class="tc-red-600">Required</span>
           </md-hint>
-          <md-hint align="end">{{userElement.value.length}} / 30</md-hint>
+          <md-hint align="end">{{descriptionElement.value.length}} / 30</md-hint>
+        </md-input-container>
+      </div>
+      <div layout="row" class="push-top">
+        <md-input-container flex>
+          <input mdInput
+                  #priceElement
+                  #priceControl="ngModel"
+                  type="number"
+                  placeholder="Preço"
+                  [(ngModel)]="price"
+                  name="price"
+                  min="0"
+                  required>
+          <md-hint align="start">
+            <span [hidden]="priceControl.pristine || !priceControl.errors?.required" class="tc-red-600">Required</span>
+          </md-hint>
+        </md-input-container>
+      </div>
+      <div layout="row" class="push-top">
+        <md-input-container flex>
+          <input mdInput
+                  #stockElement
+                  #stockControl="ngModel"
+                  type="number"
+                  placeholder="Estoque"
+                  [(ngModel)]="stock"
+                  name="stock"
+                  min="0"
+                  required>
+          <md-hint align="start">
+            <span [hidden]="stockControl.pristine || !stockControl.errors?.required" class="tc-red-600">Required</span>
+          </md-hint>
         </md-input-container>
       </div>
       <div layout="row">
-        <md-slide-toggle [(ngModel)]="enabled" name="enabled">Enabled</md-slide-toggle>
+        <md-slide-toggle [(ngModel)]="enabled" name="enabled">Ativo</md-slide-toggle>
       </div>
     </form>
     </md-card-content>
