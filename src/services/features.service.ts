@@ -6,13 +6,14 @@ import { HttpInterceptorService, RESTService } from '@covalent/http';
 import { MOCK_API } from '../config/api.config';
 
 export interface IFeature {
-  title: string;
   id: string;
-  user: string;
-  modified: Date;
-  created: Date;
-  icon: string;
-  enabled: number;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  enabled: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 @Injectable()
@@ -20,15 +21,19 @@ export class FeaturesService extends RESTService<IFeature> {
 
   constructor(private _http: HttpInterceptorService) {
     super(_http, {
-      baseUrl: MOCK_API,
-      path: '/features',
+      baseUrl: '~/api',
+      path: '/products',
     });
   }
 
   staticQuery(): Observable<IFeature[]> {
-    return this._http.get('data/features.json')
-    .map((res: Response) => {
-      return res.json();
+    return new Observable<IFeature[]>((sub) => {
+      sub.next([]);
+      sub.complete();
     });
+    // return this._http.get('data/features.json')
+    //   .map((res: Response) => {
+    //     return res.json();
+    //   });
   }
 }

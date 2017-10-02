@@ -43,7 +43,7 @@ export class ProductFeaturesComponent implements OnInit {
   }
   filterFeatures(filterTitle: string = ''): void {
     this.filteredFeatures = this.features.filter((feature: IFeature) => {
-      return feature.title.toLowerCase().indexOf(filterTitle.toLowerCase()) > -1;
+      return feature.name.toLowerCase().indexOf(filterTitle.toLowerCase()) > -1;
     });
   }
 

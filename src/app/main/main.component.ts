@@ -21,10 +21,14 @@ export class MainComponent {
       route: '/logs',
       icon: 'receipt',
     }, {
-      title: 'Manage Users',
+      title: 'Usuários',
       route: '/users',
       icon: 'people',
-    },
+    }, {
+      title: 'Gerenciar produtos',
+      route: '/product/features',
+      icon: 'people',
+    }
   ];
 
   constructor(private _router: Router) {}
