@@ -11,7 +11,10 @@ import { User, IUserSchema } from '../models/user';
 
 declare module 'express' {
   interface Request {
-    user: { id: string };
+    user: {
+      id: string,
+      admin: boolean
+    };
   }
 }
 
@@ -27,5 +30,9 @@ router.post('/local', async (req: express.Request, res: express.Response, next: 
 });
 
 function createJWT(user: IUserSchema) {
-  return jwt.sign({ id: user.id }, config.JWT_SECRET, { expiresIn: '24h' });
+  const data = {
+    id: user.id,
+    admin: user.admin
+  };
+  return jwt.sign(data, config.JWT_SECRET, { expiresIn: '24h' });
 }
