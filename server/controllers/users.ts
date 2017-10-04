@@ -1,6 +1,21 @@
 import express = require('express');
 const router = express.Router();
+
 import { User } from '../models/user';
+import { router as routerMe } from './me';
+
+// admin authorization
+router.use(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  if (!/\/me$/.test(req.url) && !req.user.admin) {
+    const error = 'Without admin permission';
+    res.status(401).send(error);
+  } else {
+    next();
+  }
+});
+
+// current user routes
+router.use('/me', routerMe);
 
 router.get('/', async (req: express.Request, res: express.Response) => {
   try {
@@ -11,7 +26,18 @@ router.get('/', async (req: express.Request, res: express.Response) => {
   }
 });
 
-router.post('/', create);
+router.post('/', async (req: express.Request, res: express.Response) => {
+  try {
+    const user = new User(req.body);
+    if (user.local.password) {
+      user.local.password = user.generateHash(user.local.password);
+    }
+    await user.save();
+    res.json(user);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 
 router.get('/:id', async (req: express.Request, res: express.Response) => {
   try {
@@ -24,34 +50,11 @@ router.get('/:id', async (req: express.Request, res: express.Response) => {
   }
 });
 
-router.get('/me', async (req: express.Request, res: express.Response) => {
-  try {
-    const _id = req.user.id;
-    const user = await User.findOne({ _id });
-    res.json(user);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
-
 router.put('/:id', async (req: express.Request, res: express.Response) => {
   try {
     const _id = req.params.id;
     const user = await User.findOne({ _id });
-    const body = Object.assign({}, req.body);
-    const local = body.local;
-    if (local) {
-      if (local.username) {
-        user.local.username = local.username;
-      }
-      if (local.password) {
-        user.local.password = user.generateHash(local.password);
-      }
-    }
-    delete body.local;
-    for (const key in body) {
-      user[key] = body[key];
-    }
+    update(user, req.body);
     await user.save();
     res.json(user);
   } catch (error) {
@@ -69,7 +72,8 @@ router.delete('/:id', async (req: express.Request, res: express.Response) => {
   }
 });
 
-export async function create(req: express.Request, res: express.Response) {
+// register user
+export async function register(req: express.Request, res: express.Response) {
   try {
     const user = new User(req.body);
     if (user.local.password) {
@@ -80,6 +84,26 @@ export async function create(req: express.Request, res: express.Response) {
   } catch (error) {
     res.status(500).send(error);
   }
+}
+
+// assign params as user attributes
+export function update(user, params) {
+  if (!params) {
+    return user;
+  }
+  if (params.local) {
+    if (params.local.username) {
+      user.local.username = params.local.username;
+    }
+    if (params.local.password) {
+      user.local.password = user.generateHash(params.local.password);
+    }
+  }
+  delete params.local;
+  for (const key in params) {
+    user[key] = params[key];
+  }
+  return user;
 }
 
 export { router };
