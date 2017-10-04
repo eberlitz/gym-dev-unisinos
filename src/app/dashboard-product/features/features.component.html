@@ -20,7 +20,7 @@
                         <md-icon>more_vert</md-icon>
                         </button>
                         <md-menu x-position="before" #menu="mdMenu">
-                            <a [routerLink]="[item.id + '/edit']" md-menu-item>Editar</a>
+                            <a [routerLink]="[item._id + '/edit']" md-menu-item>Editar</a>
                             <button (click)="openConfirm(item.id)" md-menu-item>Deletar</button>
                         </md-menu>
                     </span>
