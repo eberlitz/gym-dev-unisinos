@@ -6,7 +6,7 @@ import { IUser } from '../users/services/user.service';
 import { HttpInterceptorService } from '@covalent/http';
 
 @Component({
-  selector: 'qs-register',
+  selector: 'ag-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })

@@ -9,6 +9,14 @@ import { HttpInterceptorService } from '@covalent/http';
 @Injectable()
 export class AuthService implements CanActivate {
 
+  get user() {
+    if (this.isLoggedIn()) {
+      return this.readToken();
+    } else {
+      return null;
+    }
+  }
+
   private code: string;
 
   constructor(
@@ -26,12 +34,21 @@ export class AuthService implements CanActivate {
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     const isLoggedIn: boolean = this.isLoggedIn();
     if (!isLoggedIn && !this.code) {
-      this.router.navigate(['login']);
+      this.logout();
     }
     if (this.code) {
       return this.loginProvider();
     }
     return isLoggedIn;
+  }
+
+  async getMe() {
+    if (this.isLoggedIn()) {
+      return await this._http.get('~/api/me')
+        .map((a) => a.json())
+        .toPromise();
+    }
+    return null;
   }
 
   async auth(provider: string, options?: any) {
@@ -48,6 +65,12 @@ export class AuthService implements CanActivate {
   logout(): void {
     localStorage.removeItem('token');
     this.router.navigate(['login']);
+  }
+
+  protected readToken() {
+    let jwt: string = localStorage.getItem('token');
+    const jwtHelper = new JwtHelper();
+    return jwtHelper.decodeToken(jwt);
   }
 
   private loginProvider(): Promise<boolean> {

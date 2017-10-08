@@ -14,6 +14,8 @@ import { LoginComponent } from './login/login.component';
 import { FormComponent } from './form/form.component';
 import { AuthService } from '../services/auth.service';
 import { RegisterComponent } from './register/register.component';
+import { ProductsComponent } from './products/products.component';
+import { AdminService } from '../services/admin.service';
 
 const routes: Routes = [
   {
@@ -29,9 +31,13 @@ const routes: Routes = [
     component: MainComponent,
     canActivate: [AuthService],
     children: [
+      // {
+      //   component: DashboardComponent,
+      //   path: ''
+      // },
       {
-        component: DashboardComponent,
-        path: ''
+        path: '',
+        component: ProductsComponent,
       },
       {
         path: 'product',

@@ -9,7 +9,7 @@ const NUMBER_FORMAT: any = (v: {value: number}) => v.value;
 const DECIMAL_FORMAT: any = (v: {value: number}) => v.value.toFixed(2);
 
 @Component({
-  selector: 'qs-product-stats',
+  selector: 'ag-product-stats',
   templateUrl: './stats.component.html',
   styleUrls: ['./stats.component.scss'],
 })

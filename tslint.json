@@ -100,7 +100,7 @@
     "no-invalid-this": true,
     "no-magic-numbers": false, //TODO_LINT (we should lint for this)
     "no-namespace": true,
-    "no-null-keyword": true,
+    "no-null-keyword": false,
     "no-reference": true,
     "no-require-imports": true,
     "no-shadowed-variable": true,
@@ -168,8 +168,8 @@
       "check-type"
     ],
     // ANGULAR 2 Rules
-    "directive-selector": [true, "attribute", "qs", "camelCase"],
-    "component-selector": [true, "element", "qs", "kebab-case"],
+    "directive-selector": [true, "attribute", "ag", "camelCase"],
+    "component-selector": [true, "element", "ag", "kebab-case"],
     "component-class-suffix": true,
     "directive-class-suffix": true,
     "use-input-property-decorator": true,

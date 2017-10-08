@@ -8,7 +8,7 @@ import { UserService, IUser } from '../../users';
 import { ItemsService } from '../../../services';
 
 @Component({
-  selector: 'qs-product-overview',
+  selector: 'ag-product-overview',
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss'],
   viewProviders: [ ItemsService ],

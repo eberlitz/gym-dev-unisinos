@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FeaturesService, IFeature } from '../../../../services';
 
 @Component({
-  selector: 'qs-feature-form',
+  selector: 'ag-feature-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
   viewProviders: [FeaturesService],

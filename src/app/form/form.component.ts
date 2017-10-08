@@ -3,7 +3,7 @@ import { Component, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { StepState, TdMediaService } from '@covalent/core';
 
 @Component({
-  selector: 'qs-product-form',
+  selector: 'ag-product-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })

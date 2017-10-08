@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ItemsService } from '../../services';
 
 @Component({
-  selector: 'qs-detail',
+  selector: 'ag-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
   viewProviders: [ItemsService],

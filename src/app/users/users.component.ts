@@ -9,7 +9,7 @@ import { UserService, IUser } from './services/user.service';
 import 'rxjs/add/operator/toPromise';
 
 @Component({
-  selector: 'qs-users',
+  selector: 'ag-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })

@@ -6,7 +6,7 @@ import { TdLoadingService, TdMediaService } from '@covalent/core';
 import { ItemsService, ProductsService } from '../../services';
 
 @Component({
-  selector: 'qs-logs',
+  selector: 'ag-logs',
   templateUrl: './logs.component.html',
   styleUrls: ['./logs.component.scss'],
   viewProviders: [ ItemsService, ProductsService ],

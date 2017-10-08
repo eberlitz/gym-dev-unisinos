@@ -7,7 +7,7 @@ import { TdDialogService } from '@covalent/core';
 import { FeaturesService, IFeature } from '../../../services';
 
 @Component({
-  selector: 'qs-product-features',
+  selector: 'ag-product-features',
   templateUrl: './features.component.html',
   styleUrls: ['./features.component.scss'],
   viewProviders: [ FeaturesService ],

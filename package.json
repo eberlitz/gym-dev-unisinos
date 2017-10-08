@@ -1,8 +1,8 @@
 {
-  "name": "covalent-quickstart",
+  "name": "gym-dev-unisinos",
   "version": "1.0.0",
   "private": true,
-  "description": "Quickstart App with @covalent packages",
+  "description": "Awesome Gym",
   "keywords": [
     "angular",
     "components",
@@ -26,17 +26,8 @@
     "node": ">4.4 < 7",
     "npm": ">3"
   },
-  "repository": "https://github.com/teradata/covalent-quickstart.git",
+  "repository": "https://github.com/eberlitz/gym-dev-unisinos",
   "license": "MIT",
-  "author": "Teradata UX",
-  "contributors": [
-    "Kyle Ledbetter <kyle.ledbetter@teradata.com>",
-    "Richa Vyas <richa.vyas@teradata.com>",
-    "Ed Morales <eduardo.morales@teradata.com>",
-    "Jason Weaver <jason.weaver@teradata.com>",
-    "Jeremy Smartt <jeremy.smartt@teradata.com>",
-    "Ilsun Park <ilsun.park@teradata.com>"
-  ],
   "dependencies": {
     "@angular/animations": "^4.2.0",
     "@angular/common": "^4.2.0",

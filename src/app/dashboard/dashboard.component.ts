@@ -11,7 +11,7 @@ import { ItemsService, ProductsService, AlertsService } from '../../services';
 import { multi } from './data';
 
 @Component({
-  selector: 'qs-dashboard',
+  selector: 'ag-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   viewProviders: [ItemsService, ProductsService, AlertsService],
@@ -63,7 +63,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._titleService.setTitle('Covalent Quickstart');
+    this._titleService.setTitle('Awesome Gym');
     this._loadingService.register('items.load');
     this._itemsService.query().subscribe((items: Object[]) => {
       this.items = items;

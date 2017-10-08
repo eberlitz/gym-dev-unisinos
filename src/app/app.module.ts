@@ -17,6 +17,8 @@ import { SharedModule } from './shared/shared.module';
 import { USER_PROVIDER, USERS_API } from './users';
 import { AuthService } from '../services/auth.service';
 import { RegisterComponent } from './register/register.component';
+import { ProductsComponent } from './products/products.component';
+import { AdminService } from '../services/admin.service';
 
 const httpInterceptorProviders: Type<any>[] = [
   RequestInterceptor,
@@ -31,6 +33,7 @@ export function getAPI(): string {
     AppComponent,
     routedComponents,
     RegisterComponent,
+    ProductsComponent,
   ], // directives, components, and pipes owned by this NgModule
   imports: [
     AppRoutingModule,
@@ -51,6 +54,7 @@ export function getAPI(): string {
       provide: USERS_API, useFactory: getAPI,
     }, USER_PROVIDER,
     AuthService,
+    AdminService
   ], // additional providers needed for this module
   entryComponents: [ ],
   bootstrap: [ AppComponent ],

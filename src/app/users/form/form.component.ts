@@ -10,7 +10,7 @@ import { UserService, IUser } from '../services/user.service';
 import 'rxjs/add/operator/toPromise';
 
 @Component({
-  selector: 'qs-user-form',
+  selector: 'ag-user-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
