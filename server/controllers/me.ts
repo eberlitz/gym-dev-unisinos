@@ -1,10 +1,10 @@
 import express = require('express');
-const router = express.Router();
+const meRouter = express.Router();
 
 import { User } from '../models/user';
 import { update } from './users';
 
-router.get('/', async (req: express.Request, res: express.Response) => {
+meRouter.get('/', async (req: express.Request, res: express.Response) => {
   try {
     const _id = req.user.id;
     const user = await User.findOne({ _id });
@@ -14,7 +14,7 @@ router.get('/', async (req: express.Request, res: express.Response) => {
   }
 });
 
-router.put('/', async (req: express.Request, res: express.Response) => {
+meRouter.put('/', async (req: express.Request, res: express.Response) => {
   try {
     const _id = req.user.id;
     const user = await User.findOne({ _id });
@@ -26,7 +26,7 @@ router.put('/', async (req: express.Request, res: express.Response) => {
   }
 });
 
-router.delete('/', async (req: express.Request, res: express.Response) => {
+meRouter.delete('/', async (req: express.Request, res: express.Response) => {
   try {
     const _id = req.user.id;
     await User.remove({ _id });
@@ -36,4 +36,4 @@ router.delete('/', async (req: express.Request, res: express.Response) => {
   }
 });
 
-export { router };
+export { meRouter };

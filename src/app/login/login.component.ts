@@ -5,7 +5,7 @@ import { TdLoadingService } from '@covalent/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'qs-login',
+  selector: 'ag-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })

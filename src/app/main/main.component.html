@@ -1,8 +1,8 @@
 <td-layout #layout>
-  <td-navigation-drawer logo="assets:gym" sidenavTitle="Quickstart" name="Firstname Lastname" email="firstname.lastname@company.com">
+  <td-navigation-drawer logo="assets:gym" sidenavTitle="Awesome Gym" name="{{userName}}" email="{{userEmail}}">
     <md-nav-list>
       <ng-template let-item let-last="last" ngFor [ngForOf]="routes">
-        <a md-list-item [routerLink]="[item.route]" (click)="layout.close()">
+        <a *ngIf="!!item.admin == !!isAdmin" md-list-item [routerLink]="[item.route]" (click)="layout.close()">
           <md-icon>{{item.icon}}</md-icon>{{item.title}}</a>
       </ng-template>
     </md-nav-list>

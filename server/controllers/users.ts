@@ -2,7 +2,6 @@ import express = require('express');
 const router = express.Router();
 
 import { User } from '../models/user';
-import { router as routerMe } from './me';
 
 // admin authorization
 router.use(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -13,9 +12,6 @@ router.use(async (req: express.Request, res: express.Response, next: express.Nex
     next();
   }
 });
-
-// current user routes
-router.use('/me', routerMe);
 
 router.get('/', async (req: express.Request, res: express.Response) => {
   try {
