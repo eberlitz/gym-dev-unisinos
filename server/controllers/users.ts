@@ -1,17 +1,11 @@
 import express = require('express');
 const router = express.Router();
 
+import authorize from './../authorize';
 import { User } from '../models/user';
 
-// admin authorization
-router.use(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-  if (!/\/me$/.test(req.url) && !req.user.admin) {
-    const error = 'Without admin permission';
-    res.status(401).send(error);
-  } else {
-    next();
-  }
-});
+router.use(authorize.jwt);
+router.use(authorize.admin);
 
 router.get('/', async (req: express.Request, res: express.Response) => {
   try {

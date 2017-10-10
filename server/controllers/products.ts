@@ -1,6 +1,7 @@
 import express = require('express');
 const router = express.Router();
 
+import authorize from './../authorize';
 import { Product } from '../models/product';
 
 router.get('/', async (req: express.Request, res: express.Response) => {
@@ -12,20 +13,23 @@ router.get('/', async (req: express.Request, res: express.Response) => {
   }
 });
 
-router.post('/', async (req: express.Request, res: express.Response) => {
+router.get('/:id', async (req: express.Request, res: express.Response) => {
   try {
-    const product = new Product(req.body);
-    await product.save();
+    const _id = req.params.id;
+    const product = await Product.findOne({ _id });
     res.json(product);
   } catch (error) {
     res.status(500).send(error);
   }
 });
 
-router.get('/:id', async (req: express.Request, res: express.Response) => {
+router.use(authorize.jwt);
+router.use(authorize.admin);
+
+router.post('/', async (req: express.Request, res: express.Response) => {
   try {
-    const _id = req.params.id;
-    const product = await Product.findOne({ _id });
+    const product = new Product(req.body);
+    await product.save();
     res.json(product);
   } catch (error) {
     res.status(500).send(error);
@@ -57,4 +61,4 @@ router.delete('/:id', async (req: express.Request, res: express.Response) => {
   }
 });
 
-module.exports = router;
+export { router };
