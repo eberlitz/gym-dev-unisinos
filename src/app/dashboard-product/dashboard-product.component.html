@@ -21,16 +21,7 @@
         [routerLink]="['/product']">
         <md-icon md-list-icon>dashboard</md-icon>
         Dashboard
-      </a>
-      <a md-list-item
-        md-ripple class="block relative"
-        (click)="!media.query('gt-sm') && manageList.close()"
-        [routerLinkActive]="['active']"
-        [routerLinkActiveOptions]="{exact:true}"
-        [routerLink]="['stats']">
-        <md-icon md-list-icon>insert_chart</md-icon>
-        Stats
-      </a>
+      </a>     
       <a md-list-item
         md-ripple class="block relative"
         (click)="!media.query('gt-sm') && manageList.close()"
