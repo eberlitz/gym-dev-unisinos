@@ -8,8 +8,8 @@ import { FeaturesService, IFeature } from '../../../services';
 
 @Component({
   selector: 'ag-product-features',
-  templateUrl: './features.component.html',
-  styleUrls: ['./features.component.scss'],
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.scss'],
   viewProviders: [ FeaturesService ],
 })
 export class ProductFeaturesComponent implements OnInit {

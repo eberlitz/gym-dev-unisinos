@@ -3,10 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { MainComponent } from './main/main.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { DashboardProductComponent } from './dashboard-product/dashboard-product.component';
-import { ProductOverviewComponent } from './dashboard-product/overview/overview.component';
-import { ProductFeaturesComponent } from './dashboard-product/features/features.component';
-import { FeaturesFormComponent } from './dashboard-product/features/form/form.component';
+import { DashboardProductComponent } from './dashboard-product/dashboard-product.component';  
+import { ProductFeaturesComponent } from './dashboard-product/overview/product.component';
+import { FeaturesFormComponent } from './dashboard-product/overview/form/form.component';
 import { LogsComponent } from './logs/logs.component';
 import { DetailComponent } from './detail/detail.component';
 import { LoginComponent } from './login/login.component';
@@ -29,11 +28,7 @@ const routes: Routes = [
     path: '',
     component: MainComponent,
     canActivate: [AuthService],
-    children: [
-      // {
-      //   component: DashboardComponent,
-      //   path: ''
-      // },
+    children: [     
       {
         path: '',
         component: ProductsComponent,
@@ -44,28 +39,23 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            component: ProductOverviewComponent
-          },         
+            component: ProductFeaturesComponent
+          },        
           {
-            path: 'features',
-            children: [
-              {
-                path: '',
-                component: ProductFeaturesComponent
-              },
-              {
-                path: 'add',
-                component: FeaturesFormComponent
-              },
-              {
-                path: ':id/delete',
-                component: FeaturesFormComponent
-              },
-              {
-                path: ':id/edit',
-                component: FeaturesFormComponent
-              }
-            ]
+            path: '',
+            component: ProductFeaturesComponent
+          },
+          {
+            path: 'add',
+            component: FeaturesFormComponent
+          },
+          {
+            path: ':id/delete',
+            component: FeaturesFormComponent
+          },
+          {
+            path: ':id/edit',
+            component: FeaturesFormComponent
           }
         ]
       },
@@ -99,5 +89,5 @@ export const routedComponents: any[] = [
   MainComponent, LoginComponent,
   DashboardComponent, DashboardProductComponent,
   FormComponent, LogsComponent, DetailComponent,
-  FeaturesFormComponent, ProductFeaturesComponent, ProductOverviewComponent
+  FeaturesFormComponent, ProductFeaturesComponent
 ];

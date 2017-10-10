@@ -34,7 +34,7 @@ export class MainComponent implements OnInit {
       admin: true
     }, {
       title: 'Gerenciar produtos',
-      route: '/product/features',
+      route: '/product/',
       icon: 'people',
       admin: true
     }
