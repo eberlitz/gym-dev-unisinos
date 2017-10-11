@@ -1,10 +1,13 @@
 import express = require('express');
-const meRouter = express.Router();
+const router = express.Router();
 
+import authorize from './../authorize';
 import { User } from '../models/user';
 import { update } from './users';
 
-meRouter.get('/', async (req: express.Request, res: express.Response) => {
+router.use(authorize.jwt);
+
+router.get('/', async (req: express.Request, res: express.Response) => {
   try {
     const _id = req.user.id;
     const user = await User.findOne({ _id });
@@ -14,7 +17,7 @@ meRouter.get('/', async (req: express.Request, res: express.Response) => {
   }
 });
 
-meRouter.put('/', async (req: express.Request, res: express.Response) => {
+router.put('/', async (req: express.Request, res: express.Response) => {
   try {
     const _id = req.user.id;
     const user = await User.findOne({ _id });
@@ -26,7 +29,7 @@ meRouter.put('/', async (req: express.Request, res: express.Response) => {
   }
 });
 
-meRouter.delete('/', async (req: express.Request, res: express.Response) => {
+router.delete('/', async (req: express.Request, res: express.Response) => {
   try {
     const _id = req.user.id;
     await User.remove({ _id });
@@ -36,4 +39,4 @@ meRouter.delete('/', async (req: express.Request, res: express.Response) => {
   }
 });
 
-export { meRouter };
+export { router };
