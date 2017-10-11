@@ -53,9 +53,7 @@ describe('Component: DashboardProduct', () => {
     fixture.detectChanges();
     expect(element.querySelector('td-layout-manage-list')).toBeTruthy();
     fixture.whenStable().then(() => {
-      expect(element.querySelector('a[ng-reflect-router-link="/product"]')).toBeTruthy();
-      expect(element.querySelector('a[ng-reflect-router-link="stats"]')).toBeTruthy();
-      expect(element.querySelector('a[ng-reflect-router-link="features"]')).toBeTruthy();
+      expect(element.querySelector('a[ng-reflect-router-link="/product"]')).toBeTruthy(); 
       done();
     });
   });

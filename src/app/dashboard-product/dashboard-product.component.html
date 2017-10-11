@@ -1,4 +1,4 @@
-<td-layout-nav logo="assets:covalent">
+<td-layout-nav>
   <div td-toolbar-content layout="row" layout-align="center center" flex>
     <span>Awesome Gym</span>
     <span flex></span>
@@ -19,40 +19,9 @@
         [routerLinkActive]="['active']"
         [routerLinkActiveOptions]="{exact:true}"
         [routerLink]="['/product']">
-        <md-icon md-list-icon>dashboard</md-icon>
-        Dashboard
-      </a>
-      <a md-list-item
-        md-ripple class="block relative"
-        (click)="!media.query('gt-sm') && manageList.close()"
-        [routerLinkActive]="['active']"
-        [routerLinkActiveOptions]="{exact:true}"
-        [routerLink]="['stats']">
-        <md-icon md-list-icon>insert_chart</md-icon>
-        Stats
-      </a>
-      <a md-list-item
-        md-ripple class="block relative"
-        (click)="!media.query('gt-sm') && manageList.close()"
-        [routerLinkActive]="['active']"
-        [routerLinkActiveOptions]="{exact:true}"
-        [routerLink]="['features']">
-        <md-icon md-list-icon>star</md-icon>
-        Features
-      </a>
-      <a md-list-item (click)="!media.query('gt-sm') && manageList.close()" md-ripple class="block relative">
-        <md-icon md-list-icon>people</md-icon>
-        Customers
-      </a>
-      <h3 md-subheader>Admin Menu</h3>
-      <a md-list-item (click)="!media.query('gt-sm') && manageList.close()" md-ripple class="block relative">
-        <md-icon md-list-icon>receipt</md-icon>
-        Log
-      </a>
-      <a md-list-item (click)="!media.query('gt-sm') && manageList.close()" md-ripple class="block relative">
-        <md-icon md-list-icon>settings</md-icon>
-        Settings
-      </a>
+        <md-icon list-icon>dashboard</md-icon>
+        Manutenção de Produtos
+      </a>         
     </md-nav-list>
     <div td-toolbar-content layout="row" layout-align="start center" flex>
       <span>{{title}}</span>
