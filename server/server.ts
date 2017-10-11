@@ -38,7 +38,7 @@ app.use(morgan('dev'));
 app.use(express.static(path.resolve(__dirname, '..', 'dist')));
 
 // Set our api routes
-app.use('/api', jwt({ secret: config.JWT_SECRET }), require('./controllers/api'));
+app.use('/api', require('./controllers/api'));
 app.use('/auth', require('./controllers/auth'));
 app.use('/register', register);
 
