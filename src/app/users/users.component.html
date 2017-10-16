@@ -11,11 +11,11 @@
       <span>Usuários</span>
     </md-toolbar>
     <md-nav-list td-sidenav-content (click)="!media.query('gt-sm') && manageList.close()">
-      <a md-list-item>
+      <a (click)="onlyAdmin = false; filterUsers()" md-list-item [ngClass]="{'menu-item': !onlyAdmin}">
         <md-icon md-list-icon>account_circle</md-icon>
         Todos Usuários
       </a>
-      <a md-list-item>
+      <a (click)="onlyAdmin = true; filterUsers()" md-list-item [ngClass]="{'menu-item': onlyAdmin}">
         <md-icon md-list-icon>verified_user</md-icon>
         Administradores
       </a>
@@ -41,7 +41,7 @@
               </span>
               <span>
                   <button md-icon-button [md-menu-trigger-for]="menu">
-                  <md-icon>more_vert</md-icon>
+                    <md-icon>more_vert</md-icon>
                   </button>
                   <md-menu x-position="before" #menu="mdMenu">
                       <a [routerLink]="[user._id, 'edit']" md-menu-item>

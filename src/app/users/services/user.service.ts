@@ -5,13 +5,13 @@ import { Observable } from 'rxjs/Observable';
 import { HttpInterceptorService, RESTService } from '@covalent/http';
 
 export interface IUser {
-  id: string;
+  id?: string;
   name: string;
   email: string;
   admin: boolean;
   local: {
     username: string;
-    password: string;
+    password?: string;
   };
   createdAt: Date;
   updatedAt: Date;

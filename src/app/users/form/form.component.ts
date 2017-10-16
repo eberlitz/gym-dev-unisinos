@@ -11,8 +11,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'ag-user-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss'],
+  templateUrl: './form.component.html'
 })
 export class UsersFormComponent implements OnInit {
 
@@ -78,12 +77,15 @@ export class UsersFormComponent implements OnInit {
         name: this.name,
         admin: this.admin,
         local: {
-          username: this.username,
-          password: this.password
+          username: this.username
         },
         createdAt: now,
         updatedAt: now
       };
+
+      if (this.id !== '' && this.password !== '') {
+        this.user.local.password = this.password;
+      }
 
       if (this.action === 'add') {
         await this._userService.create(this.user).toPromise();
@@ -91,7 +93,7 @@ export class UsersFormComponent implements OnInit {
         await this._userService.update(this.id, this.user).toPromise();
       }
 
-      this._snackBarService.open('Usuário cadastrado', 'Ok');
+      this._snackBarService.open('Usuário ' + (this.action === 'add' ? 'Cadastrado' : 'Atualizado'), 'Ok');
       this.goBack();
     } catch (error) {
       this._dialogService.openAlert({ message: 'Houve um erro ao salvar o usuário.' });
