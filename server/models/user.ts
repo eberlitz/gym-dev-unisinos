@@ -10,6 +10,13 @@ export interface IUserSchema extends mongoose.Document {
     username: string;
     password: string;
   };
+  address: {
+    country: string;
+    state: string;
+    city: string;
+    street: string;
+    number: number;
+  };
   createdAt: Date;
   updatedAt: Date;
   generateHash(password: string): string;
@@ -23,6 +30,13 @@ const userSchema = new mongoose.Schema({
   local: {
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true }
+  },
+  address: {
+    country: { type: String },
+    state: { type: String },
+    city: { type: String },
+    street: { type: String },
+    number: { type: Number },
   }
 }, { timestamps: true });
 
