@@ -3,7 +3,7 @@
     <span>Academia Fitness</span>
     <span flex></span>
   </div>
-  <td-layout-card-over cardTitle="Usuário" cardSubtitle="Preencha o formulário para {{action}} o usuário">
+  <td-layout-card-over cardTitle="Usuário" cardSubtitle="Preencha o formulário para {{action == 'add' ? 'cadastrar' : 'atualizar' }} o usuário">
     <ng-template tdLoading="user.form">
       <md-card-content class="push-bottom-none">
         <form #userForm="ngForm">
@@ -69,16 +69,10 @@
               <input mdInput
                       #passwordElement
                       #passwordControl="ngModel"
-                      type="text"
+                      type="password"
                       placeholder="Senha"
                       [(ngModel)]="password"
-                      name="password"
-                      required>
-              <md-hint align="start">
-                <span [hidden]="passwordControl.pristine" class="tc-red-600">
-                  <span [hidden]="!passwordControl.hasError('required')">Obrigatório</span>
-                </span>
-              </md-hint>
+                      name="password">
             </md-input-container>
           </div>
 
@@ -90,7 +84,9 @@
       </md-card-content>
       <md-divider></md-divider>
       <md-card-actions>
-        <button md-button [disabled]="!userForm.form.valid" color="primary" (click)="save()">Cadastrar</button>
+        <button md-button [disabled]="!userForm.form.valid" color="primary" (click)="save()">
+          {{action == 'add' ? 'Cadastrar' : 'Atualizar' }}
+        </button>
         <button md-button (click)="goBack()">Cancelar</button>
       </md-card-actions>
     </ng-template>

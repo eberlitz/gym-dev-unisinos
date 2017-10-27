@@ -11,12 +11,17 @@ import 'rxjs/add/operator/toPromise';
 @Component({
   selector: 'ag-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss'],
+  styles: [`
+    .menu-item {
+      background-color: silver;
+    }
+  `]
 })
 export class UsersComponent implements AfterViewInit, OnInit {
 
   users: IUser[];
   filteredUsers: IUser[];
+  onlyAdmin: boolean = false;
 
   constructor(private _titleService: Title,
     private _loadingService: TdLoadingService,
@@ -42,7 +47,17 @@ export class UsersComponent implements AfterViewInit, OnInit {
 
   filterUsers(name: string = ''): void {
     this.filteredUsers = this.users.filter((user: IUser) => {
-      return user.name.toLowerCase().indexOf(name.toLowerCase()) > -1;
+      let valid: boolean = false;
+
+      if (user.name.toLowerCase().indexOf(name.toLowerCase()) > -1) {
+        valid = true;
+      }
+
+      if (valid && this.onlyAdmin && user.admin === false) {
+        valid = false;
+      }
+
+      return valid;
     });
   }
 
@@ -72,12 +87,15 @@ export class UsersComponent implements AfterViewInit, OnInit {
     try {
       this._loadingService.register('users.list');
       await this._userService.delete(id).toPromise();
+
       this.users = this.users.filter((user: IUser) => {
         return user.id !== id;
       });
+
       this.filteredUsers = this.filteredUsers.filter((user: IUser) => {
         return user.id !== id;
       });
+
       this._snackBarService.open('Usuário excluído', 'Ok');
     } catch (error) {
       this._dialogService.openAlert({ message: 'Houve um erro ao tentar excluir o usuário.' });
