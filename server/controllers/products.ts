@@ -6,7 +6,8 @@ import { Product } from '../models/product';
 
 router.get('/', async (req: express.Request, res: express.Response) => {
   try {
-    const products = await Product.find(req.params || {});
+    const query = searchQuery(req.query);
+    const products = await Product.find(query);
     res.json(products);
   } catch (error) {
     res.status(500).send(error);
@@ -60,5 +61,29 @@ router.delete('/:id', async (req: express.Request, res: express.Response) => {
     res.status(500).send(error);
   }
 });
+
+function searchQuery(params) {
+  const query = [];
+  if (params.name) {
+    query.push({
+      name: { $regex: new RegExp(params.name, 'i') }
+    });
+  }
+  if (params.price_greater) {
+    query.push({
+      price: { $gt: params.price_greater }
+    });
+  }
+  if (params.price_less) {
+    query.push({
+      price: { $lt: params.price_less }
+    });
+  }
+  if (query.length > 0) {
+    return { $and: query };
+  } else {
+    return {};
+  }
+}
 
 export { router };
