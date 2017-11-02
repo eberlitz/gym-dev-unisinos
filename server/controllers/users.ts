@@ -82,17 +82,17 @@ export function update(user, params) {
     return user;
   }
   if (params.local) {
-    if (params.local.username) {
-      user.local.username = params.local.username;
-    }
     if (params.local.password) {
-      user.local.password = user.generateHash(params.local.password);
+      params.local.password = user.generateHash(params.local.password);
     }
+    Object.assign(user.local, params.local);
+    delete params.local;
   }
-  delete params.local;
-  for (const key in params) {
-    user[key] = params[key];
+  if (params.address) {
+    Object.assign(user.address, params.address);
+    delete params.address;
   }
+  Object.assign(user, params);
   return user;
 }
 
