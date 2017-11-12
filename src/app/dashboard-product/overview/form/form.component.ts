@@ -33,8 +33,8 @@ export class FeaturesFormComponent implements OnInit {
       this.action = (url.length > 1 ? url[1].path : 'add');
     });
     this._route.params.subscribe((params: { id: string }) => {
-      let featureId: string = params.id;
-      this._featuresService.get(featureId).subscribe((feature: IFeature) => {
+      this.id = params.id;
+      this._featuresService.get(this.id).subscribe((feature: IFeature) => {
         Object.assign(this, feature);
         // this.id = feature.id;
         // this.title = feature.name;
@@ -53,6 +53,7 @@ export class FeaturesFormComponent implements OnInit {
       price: this.price,
       stock: this.stock,
     };
+
     if (this.action === 'add') {
       this._featuresService.create(this.feature).subscribe(() => {
         this.goBack();
