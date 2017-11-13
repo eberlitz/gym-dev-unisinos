@@ -6,7 +6,7 @@ import { HttpInterceptorService, RESTService } from '@covalent/http';
 import { MOCK_API } from '../config/api.config';
 
 export interface IFeature {
-  id: string;
+  _id: string;
   name: string;
   description: string;
   price: number;

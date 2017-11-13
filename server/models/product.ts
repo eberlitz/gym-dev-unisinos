@@ -5,6 +5,7 @@ export interface IProductSchema extends mongoose.Document {
   description: string;
   price: number;
   stock: number;
+  enabled: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -26,6 +27,9 @@ const productSchema = new mongoose.Schema({
   stock: {
     type: Number,
     required: true
+  },
+  enabled: {
+    type: Boolean
   },
 }, { timestamps: true });
 

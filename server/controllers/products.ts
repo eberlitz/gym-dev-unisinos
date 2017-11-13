@@ -37,7 +37,7 @@ router.post('/', async (req: express.Request, res: express.Response) => {
   }
 });
 
-router.put('/:id', async (req: express.Request, res: express.Response) => {
+router.patch('/:id', async (req: express.Request, res: express.Response) => {
   try {
     const _id = req.params.id;
     const product = await Product.findOne({ _id });

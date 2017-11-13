@@ -65,10 +65,10 @@ export class ProductFeaturesComponent implements OnInit {
     this._loadingService.register('features.list');
     this._featuresService.delete(id).subscribe(() => {
       this.features = this.features.filter((feature: IFeature) => {
-        return feature.id !== id;
+        return feature._id !== id;
       });
       this.filteredFeatures = this.filteredFeatures.filter((feature: IFeature) => {
-        return feature.id !== id;
+        return feature._id !== id;
       });
       this._loadingService.resolve('features.list');
     }, (error: Error) => {
