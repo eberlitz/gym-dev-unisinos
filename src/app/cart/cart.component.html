@@ -36,6 +36,10 @@
         </tbody>
       </table>
 
+      <div layout="row" layout-align="end">
+          <p>Preço total: {{getTotal()}}R$</p>
+      </div>
+
     </md-card-content>
     <md-card-actions>
       <button m-raisedv-button (click)="removeAll()">Limpar carrinho</button>

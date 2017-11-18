@@ -42,6 +42,10 @@ export class CartComponent implements OnInit {
     this.cart.removeAll();
   }
 
+  getTotal() {
+    return DECIMAL_FORMAT(this.cart.total);
+  }
+
   async finalize() {
     try {
       await this.cart.finalize();

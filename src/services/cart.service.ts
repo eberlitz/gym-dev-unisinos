@@ -2,11 +2,14 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { HttpInterceptorService } from '@covalent/http';
 
-
 @Injectable()
 export class CartService {
 
   products = [];
+
+  get total() {
+    return this.products.reduce((a, b) => a + (b.qtde * b.price), 0);
+  }
 
   constructor(private _http: HttpInterceptorService) {
     this.load();
