@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { HttpInterceptorService } from '@covalent/http';
 
+
 @Injectable()
 export class CartService {
 
@@ -16,6 +17,14 @@ export class CartService {
     this.save();
   }
 
+  async remove(product: any) {
+    const idx = this.products.indexOf(product);
+    // tslint:disable-next-line:no-bitwise
+    if (~idx) {
+      this.products.splice(idx, 1);
+    }
+  }
+
   save() {
     localStorage.setItem('cart.products', JSON.stringify(this.products));
   }
@@ -23,5 +32,6 @@ export class CartService {
   load() {
     const data = localStorage.getItem('cart.products');
     this.products = data ? JSON.parse(data) : [];
+    this.save();
   }
 }

@@ -1,3 +1,4 @@
+import { CartComponent } from './cart/cart.component';
 import { CartService } from './../services/cart.service';
 import { NgModule, Type } from '@angular/core';
 import { BrowserModule, Title }  from '@angular/platform-browser';
@@ -35,6 +36,7 @@ export function getAPI(): string {
     routedComponents,
     RegisterComponent,
     ProductsComponent,
+    CartComponent,
   ], // directives, components, and pipes owned by this NgModule
   imports: [
     AppRoutingModule,

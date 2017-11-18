@@ -2,11 +2,11 @@
   <div td-toolbar-content layout="row" layout-align="center center" flex>
     <span>Produtos</span>
     <span flex></span>
-    <button class="overflow-visible" md-icon-button>
+    <a class="overflow-visible" md-icon-button [routerLink]="['/cart']">
       <td-notification-count [notifications]="cart.products.length">
         <md-icon>add_shopping_cart</md-icon>
       </td-notification-count>
-    </button>
+    </a>
   </div>
   <div layout-gt-sm="row" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
     <div flex layout="row" layout-wrap>
