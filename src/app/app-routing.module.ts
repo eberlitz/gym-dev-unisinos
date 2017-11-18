@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { MainComponent } from './main/main.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { DashboardProductComponent } from './dashboard-product/dashboard-product.component';  
+import { DashboardProductComponent } from './dashboard-product/dashboard-product.component';
 import { ProductFeaturesComponent } from './dashboard-product/overview/product.component';
 import { FeaturesFormComponent } from './dashboard-product/overview/form/form.component';
 import { LogsComponent } from './logs/logs.component';
@@ -28,7 +28,7 @@ const routes: Routes = [
     path: '',
     component: MainComponent,
     canActivate: [AuthService],
-    children: [     
+    children: [
       {
         path: '',
         component: ProductsComponent,
@@ -40,7 +40,7 @@ const routes: Routes = [
           {
             path: '',
             component: ProductFeaturesComponent
-          },        
+          },
           {
             path: '',
             component: ProductFeaturesComponent

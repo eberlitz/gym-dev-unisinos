@@ -1,3 +1,4 @@
+import { CartService } from './../services/cart.service';
 import { NgModule, Type } from '@angular/core';
 import { BrowserModule, Title }  from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -54,7 +55,8 @@ export function getAPI(): string {
       provide: USERS_API, useFactory: getAPI,
     }, USER_PROVIDER,
     AuthService,
-    AdminService
+    AdminService,
+    CartService
   ], // additional providers needed for this module
   entryComponents: [ ],
   bootstrap: [ AppComponent ],
