@@ -4,38 +4,42 @@
     <span flex></span>
   </div>
   <md-card>
-    <md-card-content>
-      <div layout-gt-sm="row" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
+    <md-card-content style="overflow:auto">
 
-        <table td-data-table>
-          <thead>
-            <tr td-data-table-column-row>
-              <th td-data-table-column *ngFor="let column of columns" [numeric]="column.numeric">
-                {{column.label}}
-              </th>
-              <th td-data-table-column>
-                <md-icon>action</md-icon>
-                <span>Ações</span>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr td-data-table-row *ngFor="let row of items">
-              <td td-data-table-cell *ngFor="let column of columns" [numeric]="column.numeric">
-                {{column.format ? column.format(row[column.name]) : row[column.name]}}
-              </td>
-              <td td-data-table-cell (click)="removeItem(row)">
-                <button md-button class="mat-accent">Remover produtos</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <table td-data-table>
+        <thead>
+          <tr td-data-table-column-row>
+            <th td-data-table-column *ngFor="let column of columns" [numeric]="column.numeric">
+              {{column.label}}
+            </th>
+            <th td-data-table-column>
+              <span>Quantidade</span>
+            </th>
+            <th td-data-table-column>
+              <md-icon>action</md-icon>
+              <span>Ações</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr td-data-table-row *ngFor="let row of items">
+            <td td-data-table-cell *ngFor="let column of columns" [numeric]="column.numeric">
+              {{column.format ? column.format(row[column.name]) : row[column.name]}}
+            </td>
+            <td td-data-table-cell>
+              <input mdInput type="number" [(ngModel)]="row.qtde" name="email" min="1" max="20" required>
+            </td>
+            <td td-data-table-cell (click)="removeItem(row)">
+              <button md-button class="mat-accent">Remover produtos</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-      </div>
     </md-card-content>
     <md-card-actions>
-      <button m-raisedv-button>Limpar carrinho</button>
-      <button md-raised-button color="accent">Efetuar compra</button>
+      <button m-raisedv-button (click)="removeAll()">Limpar carrinho</button>
+      <button md-raised-button color="accent" (click)="finalize()">Efetuar compra</button>
     </md-card-actions>
   </md-card>
 

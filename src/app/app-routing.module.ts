@@ -15,6 +15,7 @@ import { AuthService } from '../services/auth.service';
 import { RegisterComponent } from './register/register.component';
 import { ProductsComponent } from './products/products.component';
 import { AdminService } from '../services/admin.service';
+import { FinalizeComponent } from './finalize/finalize.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
       {
         path: 'cart',
         component: CartComponent,
+      },
+      {
+        path: 'finalize',
+        component: FinalizeComponent,
       },
       {
         path: 'product',

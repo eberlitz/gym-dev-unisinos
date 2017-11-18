@@ -12,8 +12,24 @@ export class CartService {
     this.load();
   }
 
+  async find(id) {
+    return this.products.find((a) => a.id === id);
+  }
+
   async add(product) {
-    this.products.push(product);
+    let item = await this.find(product._id);
+    if (item) {
+      item.qtde++;
+    } else {
+      item = {
+        id: product._id,
+        price: product.price,
+        qtde: 1,
+        name: product.name,
+        description: product.description
+      };
+      this.products.push(item);
+    }
     this.save();
   }
 
@@ -22,7 +38,12 @@ export class CartService {
     // tslint:disable-next-line:no-bitwise
     if (~idx) {
       this.products.splice(idx, 1);
+      this.save();
     }
+  }
+
+  async removeAll() {
+    this.products.splice(0);
   }
 
   save() {
@@ -32,6 +53,12 @@ export class CartService {
   load() {
     const data = localStorage.getItem('cart.products');
     this.products = data ? JSON.parse(data) : [];
-    this.save();
+  }
+
+  async finalize() {
+    this.removeAll();
+    // this.products;
+    // tslint:disable-next-line:no-console
+    console.log('send to backend');
   }
 }

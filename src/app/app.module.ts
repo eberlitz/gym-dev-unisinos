@@ -1,3 +1,4 @@
+import { FinalizeComponent } from './finalize/finalize.component';
 import { CartComponent } from './cart/cart.component';
 import { CartService } from './../services/cart.service';
 import { NgModule, Type } from '@angular/core';
@@ -37,6 +38,7 @@ export function getAPI(): string {
     RegisterComponent,
     ProductsComponent,
     CartComponent,
+    FinalizeComponent
   ], // directives, components, and pipes owned by this NgModule
   imports: [
     AppRoutingModule,

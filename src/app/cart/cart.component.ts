@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { CartService } from './../../services/cart.service';
 import { Title } from '@angular/platform-browser';
 import { ProductsService } from './../../services/products.service';
@@ -24,7 +25,8 @@ export class CartComponent implements OnInit {
   constructor(
     private _loadingService: TdLoadingService,
     private _titleService: Title,
-    public cart: CartService
+    public cart: CartService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -34,6 +36,19 @@ export class CartComponent implements OnInit {
 
   removeItem(item) {
     this.cart.remove(item);
+  }
+
+  removeAll() {
+    this.cart.removeAll();
+  }
+
+  async finalize() {
+    try {
+      await this.cart.finalize();
+      this._router.navigate(['/finalize']);
+    } catch (error) {
+      // todo
+    }
   }
 
 }

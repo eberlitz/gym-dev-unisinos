@@ -20,7 +20,6 @@
             <p>{{ product.description }}</p>
           </md-card-content>
           <md-card-actions>
-            <a md-button color="accent" [routerLink]="['/products', product._id]">Visualizar</a>
             <button md-button color="accent" (click)="addToCart(product)">Adicionar ao carrinho</button>
           </md-card-actions>
         </md-card>
