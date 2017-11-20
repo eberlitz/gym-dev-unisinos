@@ -1,18 +1,27 @@
 <td-layout-nav logo="assets:gym">
   <div td-toolbar-content layout="row" layout-align="center center" flex>
-    <span>Início</span>
+    <span>Produtos</span>
     <span flex></span>
+    <a class="overflow-visible" md-icon-button [routerLink]="['/cart']">
+      <td-notification-count [notifications]="cart.products.length">
+        <md-icon>add_shopping_cart</md-icon>
+      </td-notification-count>
+    </a>
   </div>
   <div layout-gt-sm="row" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
-    <div layout="row" layout-wrap>
-      <div *ngFor="let product of products" flex-gt-md="25" flex-md="50" flex-sm="50">
+    <div flex layout="row" layout-wrap>
+      <div *ngFor="let product of products" flex flex-gt-md="25" flex-md="33" flex-sm="50" flex-xs="100">
         <md-card flex>
-          <md-toolbar>
-            <md-icon svgIcon="src"></md-icon>
-          </md-toolbar>
+          <md-card-title>{{ product.name }}</md-card-title>
+          <!-- <img md-card-image src="/assets/imgs/noimage.png"> -->
           <md-card-content>
-
+            <p>{{product.price}}R$</p>
+            <p>{{product.stock}} em estoque</p>
+            <p>{{ product.description }}</p>
           </md-card-content>
+          <md-card-actions>
+            <button md-button color="accent" (click)="addToCart(product)">Adicionar ao carrinho</button>
+          </md-card-actions>
         </md-card>
       </div>
     </div>
