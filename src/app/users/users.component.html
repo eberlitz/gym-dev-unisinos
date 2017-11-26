@@ -47,6 +47,9 @@
                       <a [routerLink]="[user._id, 'edit']" md-menu-item>
                         <md-icon>edit</md-icon> Editar
                       </a>
+                      <a [routerLink]="[user._id, 'address']" md-menu-item>
+                        <md-icon>edit</md-icon> Endereço
+                      </a>
                       <button md-menu-item (click)="delete(user._id)">
                         <md-icon>delete</md-icon> Excluir
                       </button>

@@ -4,6 +4,14 @@ import { Observable } from 'rxjs/Observable';
 
 import { HttpInterceptorService, RESTService } from '@covalent/http';
 
+export interface IAddress {
+  country: string;
+  state: string;
+  city: string;
+  street: string;
+  number: number;
+}
+
 export interface IUser {
   id?: string;
   name: string;
@@ -13,6 +21,7 @@ export interface IUser {
     username: string;
     password?: string;
   };
+  address: IAddress;
   createdAt: Date;
   updatedAt: Date;
 }

@@ -4,13 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { MdSnackBarModule, MdIconModule, MdListModule, MdTooltipModule, MdCardModule, MdButtonModule,
-         MdToolbarModule, MdInputModule, MdSlideToggleModule, MdMenuModule } from '@angular/material';
+  MdToolbarModule, MdInputModule, MdSlideToggleModule, MdMenuModule } from '@angular/material';
 
 import { CovalentLoadingModule, CovalentDialogsModule, CovalentMediaModule, CovalentLayoutModule,
-         CovalentSearchModule, CovalentCommonModule } from '@covalent/core';
+    CovalentSearchModule, CovalentCommonModule } from '@covalent/core';
 
 import { UsersComponent } from './users.component';
 import { UsersFormComponent } from './form/form.component';
+import { UsersAddressFormComponent } from './address/address.component';
 
 import { userRoutes } from './users.routes';
 
@@ -22,6 +23,7 @@ export { UsersComponent, UsersFormComponent, UserService, IUser, USER_PROVIDER, 
   declarations: [
     UsersComponent,
     UsersFormComponent,
+    UsersAddressFormComponent
   ], // directives, components, and pipes owned by this NgModule
   imports: [
     // angular modules

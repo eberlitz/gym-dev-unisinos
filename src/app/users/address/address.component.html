@@ -1,0 +1,89 @@
+<td-layout-nav logo="assets:gym">
+  <div td-toolbar-content layout="row" layout-align="center center" flex>
+    <span>Academia Fitness</span>
+    <span flex></span>
+  </div>
+  <td-layout-card-over cardTitle="Endereço" cardSubtitle="Preencha o formulário para atualizar o endereço">
+    <ng-template tdLoading="user.address">
+      <md-card-content class="push-bottom-none">
+        <form #userForm="ngForm">
+          <div layout="row">
+            <md-input-container flex>
+              <input mdInput
+                      #countryElement
+                      #countryControl="ngModel"
+                      type="text"
+                      placeholder="País"
+                      [(ngModel)]="country"
+                      name="country"
+                      maxlength="20"
+                      required>
+              <md-hint align="start">
+                <span [hidden]="countryControl.pristine" class="tc-red-600">
+                  <span [hidden]="!countryControl.hasError('required')">Obrigatório</span>
+                </span>
+              </md-hint>
+            </md-input-container>
+          </div>
+
+          <div layout="row">
+            <md-input-container flex>
+              <input mdInput #stateElement #stateControl="ngModel" type="text" placeholder="Estado" [(ngModel)]="state" name="state"
+                maxlength="20" required>
+              <md-hint align="start">
+                <span [hidden]="stateControl.pristine" class="tc-red-600">
+                  <span [hidden]="!stateControl.hasError('required')">Obrigatório</span>
+                </span>
+              </md-hint>
+            </md-input-container>
+          </div>
+
+          <div layout="row">
+            <md-input-container flex>
+              <input mdInput #cityElement #cityControl="ngModel" type="text" placeholder="Cidade" [(ngModel)]="city" name="city"
+                maxlength="20" required>
+              <md-hint align="start">
+                <span [hidden]="cityControl.pristine" class="tc-red-600">
+                  <span [hidden]="!cityControl.hasError('required')">Obrigatório</span>
+                </span>
+              </md-hint>
+            </md-input-container>
+          </div>
+
+          <div layout="row">
+            <md-input-container flex>
+              <input mdInput #streetElement #streetControl="ngModel" type="text" placeholder="Rua" [(ngModel)]="street" name="street"
+                maxlength="20" required>
+              <md-hint align="start">
+                <span [hidden]="streetControl.pristine" class="tc-red-600">
+                  <span [hidden]="!streetControl.hasError('required')">Obrigatório</span>
+                </span>
+              </md-hint>
+            </md-input-container>
+          </div>
+
+          <div layout="row">
+            <md-input-container flex>
+              <input mdInput #numberElement #numberControl="ngModel" type="number" placeholder="Número" [(ngModel)]="number" name="number"
+                maxlength="20" required>
+              <md-hint align="start">
+                <span [hidden]="numberControl.pristine" class="tc-red-600">
+                  <span [hidden]="!numberControl.hasError('required')">Obrigatório</span>
+                </span>
+              </md-hint>
+            </md-input-container>
+          </div>
+
+        </form>
+
+      </md-card-content>
+      <md-divider></md-divider>
+      <md-card-actions>
+        <button md-button [disabled]="!userForm.form.valid" color="primary" (click)="save()">
+          {{action == 'add' ? 'Cadastrar' : 'Atualizar' }}
+        </button>
+        <button md-button (click)="goBack()">Cancelar</button>
+      </md-card-actions>
+    </ng-template>
+  </td-layout-card-over>
+</td-layout-nav>
