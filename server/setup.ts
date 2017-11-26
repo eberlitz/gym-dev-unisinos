@@ -12,6 +12,13 @@ async function init() {
       admin: true,
       local: {
         username: 'admin'
+      },
+      address: {
+        country: 'Brasil',
+        state: 'RS',
+        city: 'São Leopoldo',
+        street: 'Av. Unisinos',
+        number: 200
       }
     });
     adminUser.local.password = adminUser.generateHash('admin');

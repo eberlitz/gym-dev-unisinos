@@ -1,3 +1,4 @@
+import { IAddress } from './../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -24,6 +25,7 @@ export class UsersFormComponent implements OnInit {
   action: string;
 
   user: IUser;
+  address: IAddress;
 
   constructor(private _userService: UserService,
     private _router: Router,
@@ -57,6 +59,7 @@ export class UsersFormComponent implements OnInit {
       this.username = user.local.username;
       this.email = user.email;
       this.admin = user.admin;
+      this.address = user.address;
 
     } catch (error) {
       this._dialogService.openAlert({ message: 'Houve um erro ao carregar o usuário.' });
@@ -79,6 +82,7 @@ export class UsersFormComponent implements OnInit {
         local: {
           username: this.username
         },
+        address: this.address,
         createdAt: now,
         updatedAt: now
       };
@@ -88,6 +92,14 @@ export class UsersFormComponent implements OnInit {
       }
 
       if (this.action === 'add') {
+        this.user.address = {
+          country: '',
+          state: '',
+          city: '',
+          street: '',
+          number: 0
+        };
+
         await this._userService.create(this.user).toPromise();
       } else {
         await this._userService.update(this.id, this.user).toPromise();
